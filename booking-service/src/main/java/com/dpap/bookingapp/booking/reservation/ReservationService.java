@@ -63,7 +63,6 @@ public class ReservationService {
 
     public void checkOutReservation(Long reservationId, Long userId) {
         var reservation = findByIdAndUserId(reservationId, userId);
-        ;
         reservation.checkOut();
         reservationRepository.updateState(reservation.getId(), reservation.getState());
     }
@@ -102,16 +101,6 @@ public class ReservationService {
 
         return allPeriods.stream().filter(period -> !splittedReservedTimeSlots.contains(period)).toList();
     }
-//
-//    public List<Room> findAvailableRooms(LocalDateTime from, LocalDateTime to) {
-//        return roomService.findAllByPlaceId()
-//                .stream()
-//                .filter(room -> Boolean.TRUE.equals(checkRoomAvailability(room., new TimeSlot(from, to))))
-//                .toList(); //TODO DD
-//    }
-//
-//    }fca
-
     public boolean checkRoomAvailability(RoomId id, TimeSlot timeSlot) {
         return usageService.isObjectAvailable(id.getId(), timeSlot);
     }

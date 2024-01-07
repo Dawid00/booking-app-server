@@ -15,7 +15,6 @@ public class Review {
     private String content;
     private Long placeId;
     private Long userId;
-//    @Enumerated(EnumType.ORDINAL)
     private int rating;
     private LocalDateTime at;
 

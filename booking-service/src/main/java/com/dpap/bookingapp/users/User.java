@@ -81,17 +81,4 @@ public class User {
         this.roles.add(role);
     }
 
-//    public static User fromEntity(UserEntity userEntity) {
-//        var user = new User();
-//        user.setId(userEntity.getId());
-//        user.setEmail(userEntity.getEmail());
-//        user.setFirstname(userEntity.getFirstname());
-//        user.setLastname(userEntity.getLastname());
-//        user.setUsername(userEntity.getUsername());
-//        user.setPassword(userEntity.getPassword());
-//        user.setRole(userEntity.getRole());
-//        return user;
-//    }
-
-
 }

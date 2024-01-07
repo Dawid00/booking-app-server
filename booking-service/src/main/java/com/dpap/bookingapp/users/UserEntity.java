@@ -3,7 +3,6 @@ package com.dpap.bookingapp.users;
 import jakarta.persistence.*;
 import java.util.List;
 
-
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -89,25 +88,12 @@ public class UserEntity {
         this.password = password;
         this.email = email;
     }
-    //
 
     public void addRole(RoleEntity role) {
         this.roles.add(role);
     }
 
     public void removeRole(RoleEntity role) {
-        if (this.roles.contains(role)) {
-            this.roles.remove(role);
-        }
+        this.roles.remove(role);
     }
 }
-//    public UserEntity(Long id, String username, String firstname, String lastname, String password, String email, Collection<Role> roles) {
-//        this.id = id;
-//        this.username = username;
-//        this.firstname = firstname;
-//        this.lastname = lastname;
-//        this.password = password;
-//        this.email = email;
-//        this.roles = roles;
-//    }
-//}
