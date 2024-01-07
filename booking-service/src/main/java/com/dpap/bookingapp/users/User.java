@@ -1,6 +1,8 @@
 package com.dpap.bookingapp.users;
 
 
+import com.dpap.bookingapp.users.roles.Role;
+
 import java.util.ArrayList;
 import java.util.List;
 

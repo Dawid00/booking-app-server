@@ -13,6 +13,7 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 
 public class ReviewController {
+
     private final ReviewService reviewService;
     private final AuthenticationService authenticationService;
 
@@ -23,7 +24,12 @@ public class ReviewController {
 
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody CreateReviewDto createReviewDto) {
-        reviewService.createReview(createReviewDto.content(), createReviewDto.placeId(), authenticationService.getLoggedUser().id(), createReviewDto.rating());
+        reviewService.createReview(
+                createReviewDto.content(),
+                createReviewDto.placeId(),
+                authenticationService.getLoggedUser().id(),
+                createReviewDto.rating()
+        );
         return ResponseEntity.status(201).build();
     }
 

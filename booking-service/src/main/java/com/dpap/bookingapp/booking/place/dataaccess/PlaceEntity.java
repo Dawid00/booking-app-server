@@ -1,7 +1,7 @@
 package com.dpap.bookingapp.booking.place.dataaccess;
 
 import com.dpap.bookingapp.booking.place.PlaceCategory;
-import com.dpap.bookingapp.booking.place.RoomSearchFilter;
+import com.dpap.bookingapp.booking.place.filters.RoomSearchFilter;
 import com.dpap.bookingapp.booking.place.room.dataaccess.RoomEntity;
 import com.dpap.bookingapp.users.UserEntity;
 import io.hypersistence.utils.hibernate.type.json.JsonType;

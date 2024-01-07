@@ -1,4 +1,4 @@
 package com.dpap.bookingapp.reviews;
 
-public record CreateReviewDto(Long placeId,String content, int   rating) {
+public record CreateReviewDto(Long placeId, String content, int rating) {
 }

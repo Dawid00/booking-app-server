@@ -1,5 +1,6 @@
 package com.dpap.bookingapp.users;
 
+import com.dpap.bookingapp.users.roles.RoleEntity;
 import jakarta.persistence.*;
 import java.util.List;
 

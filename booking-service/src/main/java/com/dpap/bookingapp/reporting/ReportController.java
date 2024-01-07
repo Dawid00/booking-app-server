@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/reports")
@@ -23,11 +22,10 @@ public class ReportController {
     private final ReservationService reservationService;
     private final ReportService reportService;
 
-    public ReportController(ReservationService reservationService, ReportService reportService) {
+    public ReportController(ReservationService reservationService) {
         this.reservationService = reservationService;
-        this.reportService = reportService;
+        this.reportService = new ReportService();
     }
-
 
     @PostMapping
     public ResponseEntity<Resource> createReports(@RequestBody GenerateReportRequest generateReportRequest) throws MalformedURLException {
@@ -35,7 +33,7 @@ public class ReportController {
                 .findReservations(SearchReservationFilter.Builder.newBuilder()
                         .placeId(generateReportRequest.getPlaceId())
                         .from(generateReportRequest.getFrom()).to(generateReportRequest.getTo()).build());
-        var fileName = createFileName(generateReportRequest.getPlaceId(), generateReportRequest.getFrom(), generateReportRequest.getTo());
+        var fileName = createFileName(generateReportRequest.getPlaceId());
         reportService.createReport(reservations, fileName);
         Path path = Paths.get(fileName);
         Resource resource = new org.springframework.core.io.FileUrlResource(path + ".json");
@@ -45,8 +43,7 @@ public class ReportController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                 .body(resource);
     }
-
-    private String createFileName(Long placeId, LocalDateTime from, LocalDateTime to) {
+    private String createFileName(Long placeId) {
         return "place_" + placeId.toString() + "_reservations";
     }
 }

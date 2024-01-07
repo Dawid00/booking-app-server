@@ -53,12 +53,6 @@ class UserController {
         return ResponseEntity.ok(userService.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username)));
     }
 
-    @PostMapping()
-    @PreAuthorize("hasAuthority('ADMIN')")
-    ResponseEntity<?> addUser(@RequestBody RegisterUserRequest registerUserRequest) {
-        userService.createUser(registerUserRequest);
-        return ResponseEntity.status(201).build();
-    }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -66,32 +60,6 @@ class UserController {
         return ResponseEntity.ok(userDatabase.findById(id).orElseThrow(() -> new RuntimeException("")));
     }
 
-    @PutMapping("/{username}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    ResponseEntity<?> updateUser(@PathVariable String username, @RequestBody RegisterUserRequest registerUserRequest) {
-        userService.updateUserByUsername(username, registerUserRequest);
-        return ResponseEntity.status(204).build();
-    }
-
-    @PutMapping()
-    ResponseEntity<?> updateLoggedUser(@RequestBody RegisterUserRequest registerUserRequest) {
-        userService.updateLoggedUser(registerUserRequest);
-        return ResponseEntity.status(204).build();
-    }
-
-    @PatchMapping("/{username}/give/admin")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    ResponseEntity<?> giveAdminRoleToUser(@PathVariable String username) {
-        userService.giveAdminRoleToUser(username);
-        return ResponseEntity.status(204).build();
-    }
-
-    @PatchMapping("/{username}/take/admin")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    ResponseEntity<?> takeAdminRoleFromUser(@PathVariable String username) {
-        userService.takeAdminRoleFromUser(username);
-        return ResponseEntity.status(204).build();
-    }
 
     @PutMapping("/password")
     ResponseEntity<?> changePasswordByLoggedUser(@Valid @RequestBody PasswordRequest passwordRequest) {
@@ -105,16 +73,4 @@ class UserController {
         return ResponseEntity.status(204).build();
     }
 
-    @DeleteMapping()
-    ResponseEntity<?> deleteLoggedUser() {
-        userService.deleteLoggedUser();
-        return ResponseEntity.status(204).build();
-    }
-
-    @DeleteMapping("/{username}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    ResponseEntity<?> deleteUser(@PathVariable String username) {
-        userService.deleteUserByUsername(username);
-        return ResponseEntity.status(204).build();
-    }
 }

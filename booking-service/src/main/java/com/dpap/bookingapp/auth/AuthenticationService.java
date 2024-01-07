@@ -7,6 +7,7 @@ import com.dpap.bookingapp.auth.userdetails.UserDetailsImpl;
 import com.dpap.bookingapp.users.*;
 import com.dpap.bookingapp.users.dto.UserQueryDto;
 import com.dpap.bookingapp.users.exception.UserNotFoundException;
+import com.dpap.bookingapp.users.roles.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.regex.Pattern;
 
 @Service
 public class AuthenticationService {

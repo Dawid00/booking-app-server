@@ -2,6 +2,8 @@ package com.dpap.bookingapp.booking.place;
 
 import com.dpap.bookingapp.auth.AuthenticationService;
 import com.dpap.bookingapp.booking.place.dataaccess.PlaceResponse;
+import com.dpap.bookingapp.booking.place.filters.PlaceSearchFilter;
+import com.dpap.bookingapp.booking.place.filters.RoomSearchFilter;
 import com.dpap.bookingapp.booking.place.room.UpdateRoomRequest;
 import com.dpap.bookingapp.booking.place.room.dto.AddRoomRequest;
 import com.dpap.bookingapp.availability.timeslot.TimeSlot;

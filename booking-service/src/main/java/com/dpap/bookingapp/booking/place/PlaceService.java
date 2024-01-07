@@ -6,6 +6,8 @@ import com.dpap.bookingapp.booking.place.dataaccess.PlaceEntity;
 import com.dpap.bookingapp.booking.place.dataaccess.PlaceRepository;
 import com.dpap.bookingapp.booking.place.dataaccess.PlaceResponse;
 import com.dpap.bookingapp.booking.place.exception.NotFoundPlaceException;
+import com.dpap.bookingapp.booking.place.filters.PlaceSearchFilter;
+import com.dpap.bookingapp.booking.place.filters.RoomSearchFilter;
 import com.dpap.bookingapp.booking.place.room.RoomService;
 import com.dpap.bookingapp.booking.place.room.UpdateRoomRequest;
 import com.dpap.bookingapp.booking.place.room.dataaccess.RoomEntity;
@@ -90,20 +92,6 @@ public class PlaceService {
             places.add(place.withRooms(rooms));
         }
         return places;
-    }
-
-    public PlaceResponse findAllRoomsInPlace(Long placeId, RoomSearchFilter roomSearchFilter, TimeSlot timeSlot) {
-        var place = findPlaceById(placeId);
-        List<RoomEntity> rooms = new ArrayList<>();
-
-        place.findRoomsByFilter(roomSearchFilter).forEach(
-                room -> {
-                    if (usageService.isObjectAvailable(room.getId(), timeSlot.adjustHours(12,10))) {
-                        rooms.add(room);
-                    }
-                }
-        );
-        return mapToPlaceResponseWithRooms(place, rooms);
     }
 
     public List<PlaceResponse> findAllByFilters(PlaceSearchFilter filter, RoomSearchFilter roomSearchFilter) {

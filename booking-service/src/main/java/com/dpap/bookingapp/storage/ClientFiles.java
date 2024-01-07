@@ -48,8 +48,10 @@ public class ClientFiles {
     }
 
     @PostMapping("/images")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile
-                                                      file, @RequestParam(value = "placeId") Long placeId) {
+    public ResponseEntity<String> uploadPhoto(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam(value = "placeId") Long placeId
+    ) {
         try {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("Please upload a file");

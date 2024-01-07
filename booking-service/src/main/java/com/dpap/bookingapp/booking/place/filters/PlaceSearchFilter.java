@@ -1,5 +1,7 @@
-package com.dpap.bookingapp.booking.place;
+package com.dpap.bookingapp.booking.place.filters;
 
+
+import com.dpap.bookingapp.booking.place.PlaceCategory;
 
 import java.util.Optional;
 

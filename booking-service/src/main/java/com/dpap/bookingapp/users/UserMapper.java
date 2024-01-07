@@ -1,5 +1,7 @@
 package com.dpap.bookingapp.users;
 
+import com.dpap.bookingapp.users.roles.Role;
+import com.dpap.bookingapp.users.roles.RoleEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

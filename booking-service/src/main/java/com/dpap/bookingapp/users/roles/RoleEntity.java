@@ -1,5 +1,6 @@
-package com.dpap.bookingapp.users;
+package com.dpap.bookingapp.users.roles;
 
+import com.dpap.bookingapp.users.UserEntity;
 import jakarta.persistence.*;
 
 import java.util.Set;

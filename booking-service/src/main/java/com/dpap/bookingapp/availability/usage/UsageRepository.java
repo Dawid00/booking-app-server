@@ -12,5 +12,6 @@ public interface UsageRepository extends JpaRepository<Usage, Long> {
 
     @Query(value = "SELECT * FROM usages a  WHERE a.object_id = :objectId AND a.start <= :finish AND a.finish >= :start", nativeQuery = true)
     List<Usage> findAllByObjectIdBetweenDates(Long objectId, LocalDateTime start, LocalDateTime finish);
+
     List<Usage> findAllByObjectId(Long objectId);
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class ReviewService {
+
     private final ReviewRepository reviewRepository;
     private final UserService userService;
 
@@ -22,15 +23,11 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    private List<Review> getReviewsForPlace(Long placeId) {
-        return reviewRepository.findAllByPlaceId(placeId);
-    }
-
     public List<ReviewDto> getReviewDtosForPlace(Long placeId) {
         return reviewRepository.findAllByPlaceId(placeId)
                 .stream().map(review -> new ReviewDto(
                         review.getRating(),
-                        userService.findByUserId(review.getUserId()).get().getEmail(),
+                        getEmailFromUser(review.getUserId()),
                         review.getContent(),
                         review.getPlaceId(),
                         review.getAt().toString()
@@ -38,14 +35,18 @@ public class ReviewService {
                 .toList();
     }
 
-    @Transactional
-    public void deleteReview(Long userId, Long reviewId) {
-        var review = findByIdAndUserId(reviewId, userId);
-        reviewRepository.deleteById(reviewId);
+    private String getEmailFromUser(Long userId) {
+        return userService.fetchEmailByUserId(userId);
     }
 
-    private Review findById(Long reviewId) {
-        return reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("Not found review with id:" + reviewId));
+    @Transactional
+    public void deleteReview(Long userId, Long reviewId) {
+        if (reviewBelongsToUser(reviewId, userId))
+            reviewRepository.deleteById(reviewId);
+    }
+
+    private boolean reviewBelongsToUser(Long reviewId, Long userId) {
+        return findByIdAndUserId(reviewId, userId) != null;
     }
 
     private Review findByIdAndUserId(Long reviewId, Long userId) {

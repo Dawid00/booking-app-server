@@ -37,7 +37,6 @@ public class SearchReservationFilter {
         return getState().isEmpty() && getPlaceId().isEmpty() && getUserId().isEmpty() && getFrom().isEmpty() && getTo().isEmpty() && getRoomId().isEmpty();
     }
 
-
     public Optional<Long> getUserId() {
         return Optional.ofNullable(userId);
     }

@@ -30,18 +30,19 @@ public class ReservationService {
         this.roomService = roomService;
     }
 
-
     @Transactional
     public void reserveRoom(AddReservationRequest request, Long userId) {
         var room = roomService.findRoomById(RoomId.fromLong(request.roomId()))
                 .orElseThrow(() -> new RuntimeException("Not found room with id: " + request.roomId()));
-        if (//room.canBeReserved() &&
-                (!checkRoomAvailability(RoomId.fromLong(request.roomId()), new TimeSlot(request.start(), request.finish()).adjustHours(12,10)))) {
+        if (!checkRoomAvailability(
+                RoomId.fromLong(request.roomId()),
+                new TimeSlot(request.start(), request.finish()).adjustHours(12, 10)
+        )) {
             throw new RuntimeException("Can not reserve room");
         }
         var now = LocalDateTime.now();
         Reservation reservation = Reservation.createReservation(
-               new TimeSlot(request.start(), request.finish()).adjustHours(12,10),
+                new TimeSlot(request.start(), request.finish()).adjustHours(12, 10),
                 request.roomId(),
                 now,
                 userId,
@@ -49,11 +50,9 @@ public class ReservationService {
                 BigDecimal.valueOf(room.getPricePerNight()),
                 14
         );
-        usageService.reserveObject(request.roomId(), new TimeSlot(request.start(), request.finish()).adjustHours(12,10), now);
+        usageService.reserveObject(request.roomId(), new TimeSlot(request.start(), request.finish()).adjustHours(12, 10), now);
         reservationRepository.save(reservation);
     }
-
-
 
     public void checkInReservation(Long userId, Long reservationId) {
         var reservation = findByIdAndUserId(reservationId, userId);
@@ -78,7 +77,6 @@ public class ReservationService {
         reservation.addCost(feeRequest.value());
     }
 
-
     Reservation findByIdAndUserId(Long reservationId, Long userId) {
         return reservationRepository.findByIdAndUserId(reservationId, userId).getOrElseThrow(() -> new RuntimeException("Not found Reservation " + reservationId));
     }
@@ -87,20 +85,6 @@ public class ReservationService {
         return reservationRepository.findById(id).getOrElseThrow(() -> new RuntimeException("Not found Reservation " + id));
     }
 
-    public List<Reservation> findAll() {
-        return reservationRepository.findAll();
-    }
-
-    private List<TimeSlot> findFreeSlotsIn(RoomId roomId, LocalDateTime from, LocalDateTime to, Integer duration) {
-        List<TimeSlot> splittedReservedTimeSlots = usageService.findAllReservedSlotsInPeriod(roomId.getId())
-                .stream()
-                .map((timeSlot -> timeSlot.allTimeSlotsWithDurationBetweenEach(duration)))
-                .flatMap(List::stream)
-                .toList();
-        List<TimeSlot> allPeriods = new TimeSlot(from, to).allTimeSlotsWithDurationBetweenEach(duration);
-
-        return allPeriods.stream().filter(period -> !splittedReservedTimeSlots.contains(period)).toList();
-    }
     public boolean checkRoomAvailability(RoomId id, TimeSlot timeSlot) {
         return usageService.isObjectAvailable(id.getId(), timeSlot);
     }
@@ -108,6 +92,4 @@ public class ReservationService {
     public List<Reservation> findReservations(SearchReservationFilter filter) {
         return reservationRepository.findAllByFilters(filter);
     }
-
-
 }

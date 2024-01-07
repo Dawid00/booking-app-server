@@ -9,8 +9,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 @Service
 @Profile("dev")
 public class NotificationServiceImpl implements NotificationService {
-    private final JavaMailSender javaMailSender;
 
+    private final JavaMailSender javaMailSender;
     private final UserService userService;
 
     public NotificationServiceImpl(JavaMailSender javaMailSender, UserService userService) {
@@ -20,17 +20,18 @@ public class NotificationServiceImpl implements NotificationService {
 
     public void sendNotification(Long userId, NotificationTemplate template) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(userService.findByUserId(userId).orElseThrow(() -> new RuntimeException("Not found user with id:" + userId)).getEmail());
-        message.setSubject("Reservation: " + template.getReservationId() + " updated.");
-        message.setText(template.getContent());
+        message.setTo(userService.fetchEmailByUserId(userId));
+        message.setSubject("Reservation: " + template.reservationId() + " updated.");
+        message.setText(template.content());
+
         javaMailSender.send(message);
     }
 
     public void sendNotification(String recipientEmail, NotificationTemplate template) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(recipientEmail);
-        message.setSubject("Reservation:" + template.getReservationId() + " updated.");
-        message.setText(template.getContent());
+        message.setSubject("Reservation:" + template.reservationId() + " updated.");
+        message.setText(template.content());
 
         javaMailSender.send(message);
     }

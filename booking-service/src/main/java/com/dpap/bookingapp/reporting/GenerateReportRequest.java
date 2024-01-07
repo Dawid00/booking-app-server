@@ -5,9 +5,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 
-public class GenerateReportRequest {
-    public GenerateReportRequest() {
-    }
+class GenerateReportRequest {
+
+    private final Long placeId;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private final LocalDateTime from;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private final LocalDateTime to;
 
     public GenerateReportRequest(Long placeId, LocalDateTime from, LocalDateTime to) {
         this.placeId = placeId;
@@ -18,30 +22,11 @@ public class GenerateReportRequest {
     public Long getPlaceId() {
         return placeId;
     }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
-    }
-
     public LocalDateTime getFrom() {
         return from;
     }
-
-    public void setFrom(LocalDateTime from) {
-        this.from = from;
-    }
-
     public LocalDateTime getTo() {
         return to;
     }
 
-    public void setTo(LocalDateTime to) {
-        this.to = to;
-    }
-
-    private Long placeId;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime from;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime to;
 }

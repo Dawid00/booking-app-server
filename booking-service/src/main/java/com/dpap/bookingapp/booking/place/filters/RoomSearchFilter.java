@@ -1,4 +1,4 @@
-package com.dpap.bookingapp.booking.place;
+package com.dpap.bookingapp.booking.place.filters;
 
 import java.util.Optional;
 

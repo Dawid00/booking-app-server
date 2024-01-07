@@ -7,7 +7,7 @@ import com.dpap.bookingapp.booking.place.room.Room;
 
 import java.util.List;
 
-public class Place {
+class Place {
     private Long id;
     private String name;
     private String description;

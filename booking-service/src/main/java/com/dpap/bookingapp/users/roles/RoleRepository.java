@@ -1,4 +1,4 @@
-package com.dpap.bookingapp.users;
+package com.dpap.bookingapp.users.roles;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

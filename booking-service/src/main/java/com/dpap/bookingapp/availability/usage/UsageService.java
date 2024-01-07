@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class UsageService {
 
-
     private final UsageRepository usageRepository;
 
     public UsageService(UsageRepository usageRepository) {
@@ -27,13 +26,6 @@ public class UsageService {
         usageRepository.save(
                 new Usage(objectId, timeSlot.getStart(), timeSlot.getEnd(), at)
         );
-    }
-
-    public List<TimeSlot> findAllReservedSlotsInPeriod(Long objectId) {
-        return usageRepository.findAllByObjectId(objectId).stream()
-                .map(usage -> new TimeSlot(usage.getStart(), usage.getFinish()))
-                .toList();
-
     }
 
     @Transactional
