@@ -188,7 +188,8 @@ public class ReservationRepository implements ReservationDatabase {
                 reservation.getCheckOut(),
                 reservation.getAt(),
                 reservation.getState().name(),
-                reservation.getValue()
+                reservation.getValue(),
+                reservation.getFreeCancellationDays()
         );
     }
 

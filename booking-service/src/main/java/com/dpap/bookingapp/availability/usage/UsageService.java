@@ -34,4 +34,8 @@ public class UsageService {
                 .findAllByObjectIdBetweenDates(objectId, timeSlot.getStart(), timeSlot.getEnd());
         usageRepository.deleteAll(availabilities);
     }
+    @Transactional
+    public void deleteByObjectId(Long objectId) {
+        usageRepository.deleteByObjectId(objectId);
+    }
 }

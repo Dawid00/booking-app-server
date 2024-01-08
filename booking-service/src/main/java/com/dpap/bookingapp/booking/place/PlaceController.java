@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -102,6 +103,7 @@ public class PlaceController {
         return ResponseEntity.status(201).body(placeId);
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePlaceEntityById(@PathVariable Long id) {
         placeService.deletePlaceByIdAndUserId(id, authenticationService.getLoggedUser().id());

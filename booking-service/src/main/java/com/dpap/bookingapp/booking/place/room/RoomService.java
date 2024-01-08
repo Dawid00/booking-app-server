@@ -34,4 +34,7 @@ public class RoomService {
     }
 
 
+    public void deleteRoomsByPlaceId(Long id) {
+        roomDatabase.deleteByPlaceId(id);
+    }
 }

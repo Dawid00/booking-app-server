@@ -2,7 +2,6 @@ package com.dpap.bookingapp.booking.reservation;
 
 
 import com.dpap.bookingapp.availability.usage.UsageService;
-import com.dpap.bookingapp.booking.place.PlaceService;
 import com.dpap.bookingapp.booking.place.room.RoomService;
 import com.dpap.bookingapp.booking.place.room.dto.RoomId;
 import com.dpap.bookingapp.booking.reservation.dto.AddReservationRequest;
@@ -23,11 +22,14 @@ public class ReservationService {
     private final UsageService usageService;
     private final ReservationRepository reservationRepository;
     private final RoomService roomService;
+    private final ReservationHostService reservationHostService;
 
-    public ReservationService(UsageService usageService, ReservationRepository reservationRepository, RoomService roomService, NotificationService notificationService, PlaceService placeService) {
+
+    public ReservationService(UsageService usageService, ReservationRepository reservationRepository, RoomService roomService, ReservationHostService reservationHostService) {
         this.usageService = usageService;
         this.reservationRepository = reservationRepository;
         this.roomService = roomService;
+        this.reservationHostService = reservationHostService;
     }
 
     @Transactional
@@ -48,10 +50,11 @@ public class ReservationService {
                 userId,
                 request.placeId(),
                 BigDecimal.valueOf(room.getPricePerNight()),
-                14
+                7
         );
         usageService.reserveObject(request.roomId(), new TimeSlot(request.start(), request.finish()).adjustHours(12, 10), now);
         reservationRepository.save(reservation);
+        reservationHostService.requestReservation(userId, reservation.getId());
     }
 
     public void checkInReservation(Long userId, Long reservationId) {
@@ -69,6 +72,7 @@ public class ReservationService {
     public void cancelReservation(Long reservationId, Long userId) {
         var reservation = findByIdAndUserId(reservationId, userId);
         reservation.cancel(LocalDateTime.now());
+        usageService.deleteByObjectId(reservation.getRoomId().getId());
         reservationRepository.updateState(reservation.getId(), reservation.getState());
     }
 

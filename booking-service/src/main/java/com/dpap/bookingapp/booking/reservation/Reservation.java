@@ -34,14 +34,15 @@ public class Reservation {
             BigDecimal pricePerNight, int freeCancellationDays) {
         long hours = ChronoUnit.HOURS.between(reservationPeriod.getStart(), reservationPeriod.getEnd());
         return new Reservation(
-                RoomId.fromLong(roomId),placeId,
+                RoomId.fromLong(roomId), placeId,
                 reservationPeriod.getStart(),
                 reservationPeriod.getEnd(),
                 at,
                 userId,
                 ReservationState.WAITING,
                 calculateReservationValue(pricePerNight, hours),
-                freeCancellationDays);
+                freeCancellationDays
+        );
     }
 
     private static BigDecimal calculateReservationValue(BigDecimal pricePerNight, Long hours) {
@@ -100,7 +101,8 @@ public class Reservation {
     public void checkIn() {
         this.state = ReservationState.CHECK_IN;
     }
-    public void paid(){
+
+    public void paid() {
         this.state = ReservationState.PAID;
     }
 
@@ -115,6 +117,7 @@ public class Reservation {
     public BigDecimal getValue() {
         return this.value;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -127,6 +130,9 @@ public class Reservation {
         this.roomId = roomId;
     }
 
+    public int getFreeCancellationDays() {
+        return freeCancellationDays;
+    }
 
     public Long getUserId() {
         return userId;
@@ -149,6 +155,7 @@ public class Reservation {
     public LocalDateTime getCheckOut() {
         return checkOut;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -174,6 +181,6 @@ public class Reservation {
         if (isInFreeCancellationTimeSlot(when)) {
             return BigDecimal.ZERO;
         }
-        return currentValue;
+        return currentValue.multiply(BigDecimal.valueOf(0.8));
     }
 }

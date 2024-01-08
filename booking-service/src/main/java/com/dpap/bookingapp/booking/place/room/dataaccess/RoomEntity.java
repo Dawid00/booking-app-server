@@ -28,14 +28,11 @@ public class RoomEntity {
     @Column(columnDefinition = "jsonb")
     private String facilities;
 
-
-
     public void assignPlace(PlaceEntity place) {
         this.place = place;
     }
 
     public RoomEntity() {
-
     }
 
     public PlaceEntity getPlace() {

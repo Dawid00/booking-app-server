@@ -167,6 +167,7 @@ public class PlaceService {
     }
 
     public void deletePlaceByIdAndUserId(Long id, Long userId) {
+        roomService.deleteRoomsByPlaceId(id);
         placeRepository.deleteAllByIdAndUserId(id, userId);
     }
 

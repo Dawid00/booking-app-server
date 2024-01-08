@@ -40,7 +40,7 @@ public class ClientFiles {
                      minioClient.getObject(
                              GetObjectArgs
                                      .builder()
-                                     .bucket("placeImages")
+                                     .bucket("booking")
                                      .object(name + ".jpg")
                                      .build())) {
             return stream.readAllBytes();
@@ -60,7 +60,7 @@ public class ClientFiles {
             minioClient.putObject(PutObjectArgs
                     .builder()
                     .bucket("booking")
-                    .object(id)
+                    .object(id + ".jpg")
                     .contentType(file.getContentType())
                     .stream(new BufferedInputStream(file.getInputStream()), file.getSize(), 5242880)
                     .build());
