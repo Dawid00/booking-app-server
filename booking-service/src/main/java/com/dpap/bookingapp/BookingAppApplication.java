@@ -1,6 +1,6 @@
 package com.dpap.bookingapp;
 
-import com.dpap.bookingapp.storage.files.FileStorageProperties;
+import com.dpap.bookingapp.storage.MinioConfigProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @SpringBootApplication()
-@EnableConfigurationProperties({FileStorageProperties.class})
+@EnableConfigurationProperties({MinioConfigProperties.class})
 public class BookingAppApplication {
 
     public static void main(String[] args) {

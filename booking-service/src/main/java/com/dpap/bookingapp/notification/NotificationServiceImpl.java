@@ -18,21 +18,19 @@ public class NotificationServiceImpl implements NotificationService {
         this.userService = userService;
     }
 
-    public void sendNotification(Long userId, NotificationTemplate template) {
-        sendNotification(userService.fetchEmailByUserId(userId), template);
+    public void sendNotification(Long userId, NotificationTemplate template, String subject) {
+        sendNotification(userService.fetchEmailByUserId(userId), template, subject);
     }
 
-    public void sendNotification(String recipientEmail, NotificationTemplate template) {
+    public void sendNotification(String recipientEmail, NotificationTemplate template, String subject) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(recipientEmail);
-        message.setSubject(createSubject(template.reservationId()));
+        message.setSubject(subject);
         message.setText(template.content());
 
         javaMailSender.send(message);
     }
 
-    private String createSubject(Long reservationId) {
-        return "Rezerwacja: " + reservationId + " zaaktualizowana. Sprawdź stan w aplikacji.";
-    }
+
 }
 

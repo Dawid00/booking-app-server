@@ -15,13 +15,14 @@ CREATE TABLE roles
 );
 CREATE TABLE users
 (
-    id           INT PRIMARY KEY NOT NULL,
-    username     TEXT,
-    first_name   TEXT,
-    last_name    TEXT,
-    password     TEXT,
-    email        TEXT,
-    phone_number TEXT            NULL
+    id             INT PRIMARY KEY NOT NULL,
+    username       TEXT,
+    first_name     TEXT,
+    last_name      TEXT,
+    password       TEXT,
+    email          TEXT,
+    account_number TEXT,
+    phone_number   TEXT            NULL
 );
 CREATE TABLE users_roles
 (
@@ -119,9 +120,9 @@ CREATE TABLE reservations
 );
 CREATE TABLE images
 (
-    id                     INT PRIMARY KEY NOT NULL,
-    place_id               INT             NOT NULL,
-    url text
+    id       INT PRIMARY KEY NOT NULL,
+    place_id INT             NOT NULL,
+    url      text
 );
 -- CREATE TABLE accommodations
 -- (

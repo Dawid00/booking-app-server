@@ -1,6 +1,6 @@
 package com.dpap.bookingapp.notification;
 
 public interface NotificationService {
-    void sendNotification(String recipientEmail, NotificationTemplate template);
-    void sendNotification(Long userId, NotificationTemplate template);
+    void sendNotification(String recipientEmail, NotificationTemplate template, String subject);
+    void sendNotification(Long userId, NotificationTemplate template, String subject);
 }

@@ -22,14 +22,14 @@ public class UsageService {
                 findAllByObjectIdBetweenDates(objectId, timeSlot.getStart(), timeSlot.getEnd()).isEmpty();
     }
 
-    public void reserveObject(Long objectId, TimeSlot timeSlot, LocalDateTime at) {
+    public void busy(Long objectId, TimeSlot timeSlot, LocalDateTime at) {
         usageRepository.save(
                 new Usage(objectId, timeSlot.getStart(), timeSlot.getEnd(), at)
         );
     }
 
     @Transactional
-    public void delete(Long objectId, TimeSlot timeSlot) {
+    public void free(Long objectId, TimeSlot timeSlot) {
         List<Usage> availabilities = usageRepository
                 .findAllByObjectIdBetweenDates(objectId, timeSlot.getStart(), timeSlot.getEnd());
         usageRepository.deleteAll(availabilities);

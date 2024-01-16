@@ -32,7 +32,7 @@ public class Reservation {
             Long userId,
             Long placeId,
             BigDecimal pricePerNight, int freeCancellationDays) {
-        long hours = ChronoUnit.HOURS.between(reservationPeriod.getStart(), reservationPeriod.getEnd());
+        var days = ChronoUnit.DAYS.between(reservationPeriod.getStart(), reservationPeriod.getEnd());
         return new Reservation(
                 RoomId.fromLong(roomId), placeId,
                 reservationPeriod.getStart(),
@@ -40,14 +40,13 @@ public class Reservation {
                 at,
                 userId,
                 ReservationState.WAITING,
-                calculateReservationValue(pricePerNight, hours),
+                calculateReservationValue(pricePerNight, days),
                 freeCancellationDays
         );
     }
 
-    private static BigDecimal calculateReservationValue(BigDecimal pricePerNight, Long hours) {
-        var nights = hours / 22;
-        return pricePerNight.multiply(BigDecimal.valueOf(nights));
+    private static BigDecimal calculateReservationValue(BigDecimal pricePerNight, Long days) {
+        return pricePerNight.multiply(BigDecimal.valueOf(days));
     }
 
     public Long getPlaceId() {
@@ -71,7 +70,6 @@ public class Reservation {
         this.roomId = roomId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
-
         this.placeId = placeId;
         this.at = at;
         this.userId = userId;
@@ -100,10 +98,6 @@ public class Reservation {
 
     public void checkIn() {
         this.state = ReservationState.CHECK_IN;
-    }
-
-    public void paid() {
-        this.state = ReservationState.PAID;
     }
 
     public void checkOut() {
@@ -138,7 +132,6 @@ public class Reservation {
         return userId;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -169,18 +162,14 @@ public class Reservation {
         return Objects.hash(id, roomId, checkIn, checkOut, at, userId, state, value);
     }
 
-    private boolean isIn24H(LocalDateTime dateTime) {
-        return at.plusDays(1).isAfter(dateTime);
-    }
-
     private boolean isInFreeCancellationTimeSlot(LocalDateTime dateTime) {
-        return checkIn.isBefore(dateTime.plusDays(freeCancellationDays)) || isIn24H(dateTime);
+        return checkIn.isAfter(dateTime.plusDays(freeCancellationDays));
     }
 
     private BigDecimal calculateCost(BigDecimal currentValue, LocalDateTime when) {
         if (isInFreeCancellationTimeSlot(when)) {
             return BigDecimal.ZERO;
         }
-        return currentValue.multiply(BigDecimal.valueOf(0.8));
+        return currentValue.multiply(BigDecimal.valueOf(1));
     }
 }

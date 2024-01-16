@@ -7,11 +7,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MinioClientConfiguration {
 
+    private final MinioConfigProperties properties;
+
+    public MinioClientConfiguration(MinioConfigProperties properties) {
+        this.properties = properties;
+    }
+
     @Bean
     public MinioClient minioClient() {
         return io.minio.MinioClient.builder()
-                .endpoint("http://127.0.0.1:9000")
-                .credentials("minioadmin", "minioadmin")
+                .endpoint(properties.getHost())
+                .credentials(properties.getUsername(), properties.getPassword())
                 .build();
     }
 }

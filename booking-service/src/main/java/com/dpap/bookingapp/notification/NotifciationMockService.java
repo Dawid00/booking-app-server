@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Profile("mock")
-public class NotifciationMockService implements NotificationService{
+public class NotifciationMockService implements NotificationService {
 
     @Override
-    public void sendNotification(String recipientEmail, NotificationTemplate template) {
+    public void sendNotification(String recipientEmail, NotificationTemplate template, String subject) {
+
     }
 
     @Override
-    public void sendNotification(Long userId, NotificationTemplate template) {
+    public void sendNotification(Long userId, NotificationTemplate template, String subject) {
+
     }
 }

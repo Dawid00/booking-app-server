@@ -30,6 +30,7 @@ public class UserMapper {
                 user.getLastname(),
                 user.getPassword(),
                 user.getEmail(),
+                user.getAccountNumber(),
                 roles
         );
     }
@@ -42,6 +43,7 @@ public class UserMapper {
                 userEntity.getLastName(),
                 userEntity.getPassword(),
                 userEntity.getEmail(),
+                userEntity.getAccountNumber(),
                 userEntity.getRoles().stream().map(RoleEntity::getType).toList()
         );
     }

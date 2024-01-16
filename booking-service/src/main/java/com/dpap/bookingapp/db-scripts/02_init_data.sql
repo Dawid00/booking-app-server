@@ -9,6 +9,7 @@ VALUES ((SELECT nextval('seq_users')),
         'Plewik',
         '$2a$10$eC1bdpvwVdZBFpc3nu6GRO7gDs26W4Sf5mEMjXS2c4H/f3qrciKou',
         's95529@pollub.edu.pl',
+        '124312124125125125125',
         '123456789');
 INSERT INTO users
 VALUES ((SELECT nextval('seq_users')),
@@ -17,6 +18,7 @@ VALUES ((SELECT nextval('seq_users')),
         'Kiwelp',
         '$2a$10$eC1bdpvwVdZBFpc3nu6GRO7gDs26W4Sf5mEMjXS2c4H/f3qrciKou',
         'diwad@kiwelp.com',
+        '124312124125125125125',
         '123456789');
 INSERT INTO users_roles
 VALUES (1, 1);

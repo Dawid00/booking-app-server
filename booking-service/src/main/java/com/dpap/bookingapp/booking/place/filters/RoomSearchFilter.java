@@ -3,13 +3,9 @@ package com.dpap.bookingapp.booking.place.filters;
 import java.util.Optional;
 
 public class RoomSearchFilter {
+
     private Long pricePerNight;
     private Integer capacity;
-
-    public RoomSearchFilter(Long pricePerNight, Integer capacity) {
-        this.pricePerNight = pricePerNight;
-        this.capacity = capacity;
-    }
 
     private RoomSearchFilter(Builder builder) {
         pricePerNight = builder.pricePerNight;

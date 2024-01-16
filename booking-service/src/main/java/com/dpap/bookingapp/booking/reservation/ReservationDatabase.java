@@ -2,6 +2,7 @@ package com.dpap.bookingapp.booking.reservation;
 
 import io.vavr.control.Option;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ReservationDatabase {
@@ -11,5 +12,5 @@ public interface ReservationDatabase {
 
     void save(Reservation reservation);
 
-    void updateState(Long reservationId, ReservationState state);
+    void update(Long reservationId, BigDecimal value, ReservationState state);
 }

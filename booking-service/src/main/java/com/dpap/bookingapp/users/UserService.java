@@ -63,4 +63,11 @@ public class UserService {
                 .map(User::getEmail)
                 .orElseThrow(() -> new RuntimeException("Not found user with id:" + userId));
     }
+
+    public String fetchAccountNumber(Long userId) {
+        return findByUserId(userId)
+                .map(User::getAccountNumber)
+                .orElseThrow(() -> new RuntimeException("Not found user with id:" + userId));
+    }
+
 }

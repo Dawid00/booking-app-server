@@ -2,6 +2,7 @@ package com.dpap.bookingapp.users;
 
 import com.dpap.bookingapp.users.roles.RoleEntity;
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class UserEntity {
     private String lastName;
     private String password;
     private String email;
+    private String accountNumber;
 
     public UserEntity() {
     }
@@ -52,6 +54,10 @@ public class UserEntity {
         return firstName;
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
     public void setFirstName(String firstname) {
         this.firstName = firstname;
     }
@@ -80,14 +86,23 @@ public class UserEntity {
         this.email = email;
     }
 
-    public UserEntity(Long id, String username, String firstName, String lastname, String password, String email, List<RoleEntity> roles) {
+    public UserEntity(Long id, String username, String firstName, String lastname, String password, String email, String accountNumber, List<RoleEntity> roles) {
         this.id = id;
         this.username = username;
+        this.accountNumber = accountNumber;
         this.firstName = firstName;
         this.roles = roles;
         this.lastName = lastname;
         this.password = password;
         this.email = email;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public void addRole(RoleEntity role) {

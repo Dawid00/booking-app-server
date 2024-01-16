@@ -12,13 +12,16 @@ public class User {
     private String firstname;
     private String lastname;
     private String password;
+    private String accountNumber;
     private String email;
     private List<Role> roles = new ArrayList<>();
+
     public User() {
     }
 
-    public User(Long id, String username, String firstname, String lastname, String password, String email, List<Role> roles) {
+    public User(Long id, String username, String firstname, String lastname, String password, String email, String accountNumber, List<Role> roles) {
         this.id = id;
+        this.accountNumber = accountNumber;
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -63,6 +66,14 @@ public class User {
         return password;
     }
 
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -83,4 +94,7 @@ public class User {
         this.roles.add(role);
     }
 
+    public String getAccountNumber() {
+        return this.accountNumber;
+    }
 }

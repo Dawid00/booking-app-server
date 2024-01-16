@@ -55,12 +55,13 @@ public class ReservationRepository implements ReservationDatabase {
             ?,
             ?,
             (SELECT id FROM reservation_states WHERE name LIKE ?),
+            ?,
             ?
             )
             """;
     private static final String UPDATE_STATE = """
-            UPDATE  reservations SET state_id =
-            (SELECT id FROM reservation_states WHERE name LIKE ?)
+            UPDATE  reservations SET state_id = (SELECT id FROM reservation_states WHERE name LIKE ?),
+            value = ?
             WHERE id = ?
             """;
     private static final String FIND_BY_ID_AND_USER_ID =
@@ -193,8 +194,9 @@ public class ReservationRepository implements ReservationDatabase {
         );
     }
 
-    public void updateState(Long reservationId, ReservationState state) {
-        this.jdbcTemplate.update(UPDATE_STATE, state.name(), reservationId);
+    @Override
+    public void update(Long reservationId, BigDecimal value, ReservationState state) {
+        this.jdbcTemplate.update(UPDATE_STATE, state.name(), value, reservationId);
     }
 
     private RowMapper<Reservation> reservationRowMapper() {
