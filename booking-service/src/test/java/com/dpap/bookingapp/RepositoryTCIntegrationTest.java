@@ -1,9 +1,9 @@
 package com.dpap.bookingapp;
 
-import com.dpap.bookingapp.booking.place.PlaceCategory;
-import com.dpap.bookingapp.booking.place.dataaccess.Address;
-import com.dpap.bookingapp.booking.place.dataaccess.PlaceEntity;
-import com.dpap.bookingapp.booking.place.dataaccess.PlaceRepository;
+import com.dpap.bookingapp.place.PlaceCategory;
+import com.dpap.bookingapp.place.dataaccess.Address;
+import com.dpap.bookingapp.place.dataaccess.PlaceEntity;
+import com.dpap.bookingapp.place.dataaccess.PlaceRepository;
 import com.dpap.bookingapp.users.UserEntity;
 import com.dpap.bookingapp.users.UserJpaRepository;
 import org.junit.jupiter.api.Test;

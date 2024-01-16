@@ -50,7 +50,8 @@ public class ReviewService {
     }
 
     private Review findByIdAndUserId(Long reviewId, Long userId) {
-        return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() -> new RuntimeException("Not found review with id:" + reviewId));
+        return reviewRepository.findByIdAndUserId(reviewId, userId)
+                .orElseThrow(() -> new RuntimeException("Not found review with id:" + reviewId));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.dpap.bookingapp.reporting;
 
-import com.dpap.bookingapp.booking.reservation.ReservationService;
-import com.dpap.bookingapp.booking.reservation.dto.SearchReservationFilter;
+import com.dpap.bookingapp.reservation.ReservationService;
+import com.dpap.bookingapp.reservation.dto.SearchReservationFilter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

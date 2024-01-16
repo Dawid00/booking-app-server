@@ -1,11 +1,10 @@
 package com.dpap.bookingapp.reporting;
 
-import com.dpap.bookingapp.booking.reservation.Reservation;
+import com.dpap.bookingapp.reservation.Reservation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
 import java.io.Writer;
