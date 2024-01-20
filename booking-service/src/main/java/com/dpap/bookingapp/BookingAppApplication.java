@@ -5,6 +5,7 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,6 +22,13 @@ public class BookingAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookingAppApplication.class, args);
     }
+
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.password}")
+    private String password;
+    @Value("${spring.datasource.username}")
+    private String username;
 
     @Bean
     public OpenAPI customizeOpenAPI() {
@@ -39,9 +47,9 @@ public class BookingAppApplication {
     @Bean
     public DataSource postgreSQL() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/boking");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("password");
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
