@@ -32,7 +32,6 @@ public class Reservation {
             Long userId,
             Long placeId,
             BigDecimal pricePerNight, int freeCancellationDays) {
-        var days = ChronoUnit.DAYS.between(reservationPeriod.getStart(), reservationPeriod.getEnd());
         return new Reservation(
                 RoomId.fromLong(roomId), placeId,
                 reservationPeriod.getStart(),
@@ -40,7 +39,7 @@ public class Reservation {
                 at,
                 userId,
                 ReservationState.WAITING,
-                calculateReservationValue(pricePerNight, days),
+                calculateReservationValue(pricePerNight,  reservationPeriod.durationInDays()),
                 freeCancellationDays
         );
     }

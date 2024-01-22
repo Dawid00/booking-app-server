@@ -1,6 +1,7 @@
 package com.dpap.bookingapp.availability.timeslot;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -90,5 +91,11 @@ public class TimeSlot {
                 endHour, 0, 0
         );
         return new TimeSlot(startDate, endDate);
+    }
+
+    public Long durationInDays() {
+        LocalDateTime start = this.start.toLocalDate().atStartOfDay();
+        LocalDateTime end = this.end.toLocalDate().atStartOfDay();
+        return ChronoUnit.DAYS.between(start, end);
     }
 }
