@@ -1,5 +1,5 @@
-Oto lista funkcjonalności dla aplikacji do rezerwacji noclegów: 
-Rezerwacja pokoi: Umożliwia użytkownikom wyszukiwanie dostępnych pokoi według preferencji, takich jak lokalizacja, cena, rodzaj pokoju, liczba gości itp. 
-Galeria zdjęć i opisy: Aplikacja powinna prezentować galerię zdjęć pokoi, aby użytkownicy mogli zobaczyć, jak wygląda dany obiekt. Powinien być również dostępny opis, który zawiera informacje na temat udogodnień, polityki anulowania rezerwacji itp.
-Oceny i opinie: Użytkownicy powinni mieć możliwość przeglądania ocen i opinii innych gości, aby ocenić jakość i wiarygodność obiektu. Mogą również sami dodawać recenzje po zakończeniu pobytu. 
-Powiadomienia i potwierdzenia: Użytkownicy powinni otrzymywać potwierdzenia rezerwacji i inne ważne powiadomienia dotyczące ich pobytu, takie jak informacje o zameldowaniu i wymeldowaniu, zmiany w rezerwacji itp.
+Here is a list of functionalities for an accommodation booking app:
+Room booking: Allows users to search for available rooms based on preferences such as location, price, room type, number of guests, etc. 
+Photo gallery and descriptions: The app should present a photo gallery of rooms so that users can see, what a given object looks like. There should also be a description available that includes information about amenities, cancellation policy, etc. 
+Ratings and Reviews: Users should be able to view ratings and reviews from other guests to assess the quality and trustworthiness of the property. They can also add reviews themselves after their stay.
+Notifications and Confirmations: Users should receive booking confirmations and other important notifications regarding their stay, such as check-in and check-out information.
